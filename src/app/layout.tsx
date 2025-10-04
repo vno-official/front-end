@@ -46,7 +46,7 @@ export default async function RootLayout({
       <body className={cn(montserrat.variable, "antialiased")}>
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
+          defaultTheme="light"
           enableSystem
           disableTransitionOnChange
         >

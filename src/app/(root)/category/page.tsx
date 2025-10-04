@@ -14,7 +14,7 @@ const CategoryPage = () => {
     queryFn: async () => appClient.categoris.getAll({}),
   });
 
-  if (!isLoading) {
+  if (isLoading) {
     return <Loader className="w-8 h-8" />
   }
   if (!data) {
