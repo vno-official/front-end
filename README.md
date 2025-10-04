@@ -1,36 +1,50 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚀 Next.js Project Template — Core Setup with Shadcn/UI & TanStack Query
 
-## Getting Started
+Một template khởi tạo sẵn dành cho các dự án Frontend hiện đại, sử dụng **Next.js**, **Shadcn/UI**, và **TanStack Query** làm core libraries. Template giúp bạn bắt đầu nhanh chóng với cấu trúc chuẩn, UI component thống nhất, và hệ thống data-fetching mạnh mẽ.
 
-First, run the development server:
+---
+
+## 🧱 Tech Stack
+
+| Công nghệ      | Mục đích                                                             |
+|----------------|---------------------------------------------------------------------|
+| **Next.js 15+** | Framework React hỗ trợ App Router, SSR, API Routes                  |
+| **Shadcn/UI**   | Bộ UI components dựa trên Radix + Tailwind, dễ tùy biến             |
+| **TanStack Query (React Query)** | Data fetching & caching hiệu quả với server state management |
+| **TypeScript**  | Static typing giúp code an toàn hơn                                 |
+| **ESLint + Prettier** (optional) | Định dạng và giữ quy tắc code nhất quán            |
+
+---
+
+## 📁 Cấu trúc Thư Mục
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+src/
+ ├─ app/               # Next.js App Router
+ ├─ components/        # UI Components
+ ├─ hooks/             # Custom hooks
+ ├─ lib/               # Helper utilities
+ ├─ apis/              # API client setup 
+ ├─ styles/            # Global styles
+ └─ icons/             # SVG icons (SVGR support)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## ⚙️ Features Đã Cấu Hình Sẵn
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+-  ✅ Shadcn/UI với các thành phần cơ bản (Button, Input, Dialog, Table,...)
+-  ✅ TanStack Query Provider cấu hình sẵn ở layout.tsx
+-  ✅ API Client Wrapper với fetch/axios (nếu có)
+-  ✅ Dark Mode Support (tuỳ chọn)
+-  ✅ SVG Loader (@svgr/webpack) hỗ trợ import <Icon /> trực tiếp
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🚀 Cách chạy dự án
+```bash
+# Cài dependencies
+pnpm install
 
-## Learn More
+# Chạy dev
+pnpm dev
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+# Build production
+pnpm build && pnpm start
+```
