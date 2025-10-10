@@ -30,9 +30,11 @@ const nextConfig: NextConfig = {
       },
     },
   },
-
   typescript: {
     ignoreBuildErrors: true,
+  },
+  images: {
+    domains: ["plus.unsplash.com", "images.unsplash.com"],
   },
 };
 

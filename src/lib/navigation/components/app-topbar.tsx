@@ -2,9 +2,13 @@
 import React, { ComponentProps, FC } from "react";
 import { useRouter } from "../hooks";
 import { Button } from "@/components/ui/button";
-import { ArrowLeftIcon, HomeIcon } from "lucide-react";
+import { ArrowLeftIcon, ChevronLeft, HomeIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { Tooltip } from "@/components/ui/tooltip";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { Typography } from "@/components/common/typography";
 
 interface AppTopbarProps extends ComponentProps<"div"> {
@@ -42,9 +46,19 @@ const AppTopbar: FC<AppTopbarProps> = ({
     leftFromProps
   ) : canBack ? (
     <Tooltip>
-      <Button size={"icon"} variant={"ghost"} onClick={handleBack}>
-        <ArrowLeftIcon className="size-6" />
-      </Button>
+      <TooltipTrigger asChild>
+        <Button
+          variant={"none"}
+          className="gap-0.5 !p-0 text-muted-foreground hover:text-primary"
+          onClick={handleBack}
+        >
+          <ChevronLeft className="size-5" />
+          Back
+        </Button>
+      </TooltipTrigger>
+      <TooltipContent className="z-[100]">
+        <Typography variant="small">Back</Typography>
+      </TooltipContent>
     </Tooltip>
   ) : null;
 
@@ -58,16 +72,16 @@ const AppTopbar: FC<AppTopbarProps> = ({
 
   return (
     <>
-      <div className="h-[66px]" />
+      <div className="h-[50px]" />
 
       <div
         className={cn(
-          "bg-background fixed top-0 left-0 z-[100] w-full py-2",
+          "bg-background fixed top-0 left-0 z-[100] w-full",
           className
         )}
         {...props}
       >
-        <div className="relative flex h-[50px] items-center justify-between gap-2 px-4">
+        <div className="relative flex h-[50px] items-center max-w-lg mx-auto md:border-x-8 md:border-t-8 md:border-primary justify-between gap-2 px-4">
           <div>{left}</div>
 
           <div

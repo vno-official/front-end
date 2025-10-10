@@ -8,6 +8,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getTranslations } from "next-intl/server";
 import { DEFAULT_METADATA } from "@/config/metadata";
 import { cn } from "@/lib/utils";
+import SiteBody from "@/components/layouts/body";
 
 const montserrat = Montserrat({
   subsets: ["vietnamese"],
@@ -20,7 +21,7 @@ export const generateMetadata = async (): Promise<Metadata> => {
   return {
     ...DEFAULT_METADATA,
     title: {
-      default: `Core | ${t("title")}`,
+      default: `VNO | ${t("title")}`,
       template: `%s | ${t("title")}`,
     },
   };
@@ -52,7 +53,9 @@ export default async function RootLayout({
         >
           <NextTopLoader color="var(--foreground)" showSpinner={false} />
           <NextIntlClientProvider>
-            <RqProvider>{children}</RqProvider>
+            <RqProvider>
+              <SiteBody>{children}</SiteBody>
+            </RqProvider>
           </NextIntlClientProvider>
         </ThemeProvider>
       </body>
