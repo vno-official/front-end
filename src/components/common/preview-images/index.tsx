@@ -10,7 +10,6 @@ import {
   DialogOverlay,
   DialogClose,
 } from "@/components/ui/dialog";
-import { AppTopbar } from "@/lib/navigation";
 import Image from "next/image";
 import { type FC, useState, memo, useRef, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -45,7 +44,7 @@ interface PreviewImagesProps {
 }
 
 const PreviewImages: FC<PreviewImagesProps> = memo(
-  ({ images, initialSlide = 0, open = false, title, onClose }) => {
+  ({ images, initialSlide = 0, open = false, onClose }) => {
     const [currentIndex, setCurrentIndex] = useState(initialSlide);
     const swiperRef = useRef<SwiperType | null>(null);
 
@@ -84,8 +83,7 @@ const PreviewImages: FC<PreviewImagesProps> = memo(
 
     const updateTransform = (
       index: number,
-      type: "zoomIn" | "zoomOut" | "rotateLeft" | "rotateRight" | "reset",
-      customScale?: number
+      type: "zoomIn" | "zoomOut" | "rotateLeft" | "rotateRight" | "reset"
     ) => {
       setTransformStates((prev) =>
         prev.map((item, i) => {

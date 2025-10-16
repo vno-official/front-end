@@ -2,14 +2,20 @@
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { AppTopbar } from "@/lib/navigation";
+import { AppTopbar, useRouter } from "@/lib/navigation";
 import React from "react";
-import { useOnboarding } from "./context";
 import { slides } from "./config";
 import { cn } from "@/lib/utils";
+import { useOnboardingStore } from "@/stores/onboarding";
 
 const OnboardingScreenTopBar = () => {
-  const { currentStep, skip, goToStep } = useOnboarding();
+  const { currentStep, skip, goToStep } = useOnboardingStore();
+  const router = useRouter();
+
+  const handleSkip = () => {
+    skip();
+    router.push("/");
+  };
 
   return (
     <AppTopbar
@@ -23,7 +29,8 @@ const OnboardingScreenTopBar = () => {
               className={cn(
                 "size-6 rounded-full px-1 font-mono tabular-nums cursor-pointer transition-all duration-200 ease-in hover:bg-muted",
                 {
-                  "bg-primary text-primary-foreground hover:bg-primary pointer-events-none": index === currentStep,
+                  "bg-primary text-primary-foreground hover:bg-primary pointer-events-none":
+                    index === currentStep,
                 }
               )}
             >
@@ -34,7 +41,7 @@ const OnboardingScreenTopBar = () => {
       }
       right={
         <Button
-          onClick={skip}
+          onClick={handleSkip}
           variant="none"
           className="p-0 text-muted-foreground opacity-50 hover:opacity-100 hover:text-primary"
         >

@@ -8,7 +8,8 @@ import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getTranslations } from "next-intl/server";
 import { DEFAULT_METADATA } from "@/config/metadata";
 import { cn } from "@/lib/utils";
-import SiteBody from "@/components/layouts/body";
+import AppWrapper from "@/components/layouts/wrapper";
+import { AppBottombar } from "@/lib/navigation";
 
 const montserrat = Montserrat({
   subsets: ["vietnamese"],
@@ -54,7 +55,8 @@ export default async function RootLayout({
           <NextTopLoader color="var(--foreground)" showSpinner={false} />
           <NextIntlClientProvider>
             <RqProvider>
-              <SiteBody>{children}</SiteBody>
+              <AppWrapper>{children}</AppWrapper>
+              <AppBottombar />
             </RqProvider>
           </NextIntlClientProvider>
         </ThemeProvider>

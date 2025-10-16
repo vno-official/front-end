@@ -1,9 +1,7 @@
-import { OnboardingScreen
- } from "@/features/components";
 import React from "react";
 
 const HomePageScreen = () => {
-  return <OnboardingScreen />;
+  return <div className="min-h-screen">Home page</div>;
 };
 
 export default HomePageScreen;

@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 import React from "react";
 
 const OnboardingScreenBottom = () => {
@@ -7,6 +8,8 @@ const OnboardingScreenBottom = () => {
       <Button
         size={"lg"}
         className="rounded-full flex-1 h-[56px] font-semibold"
+        as={Link}
+        href="/login"
       >
         Log in
       </Button>
@@ -14,6 +17,8 @@ const OnboardingScreenBottom = () => {
         size={"lg"}
         variant={"secondary"}
         className="rounded-full flex-1 h-[56px] font-semibold"
+        as={Link}
+        href="/register"
       >
         Register
       </Button>

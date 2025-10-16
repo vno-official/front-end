@@ -2,7 +2,7 @@
 import React, { ComponentProps, FC } from "react";
 import { useRouter } from "../hooks";
 import { Button } from "@/components/ui/button";
-import { ArrowLeftIcon, ChevronLeft, HomeIcon } from "lucide-react";
+import { ChevronLeft, HomeIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
   Tooltip,

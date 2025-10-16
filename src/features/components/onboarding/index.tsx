@@ -1,19 +1,17 @@
 "use client";
 import OnBoardingBody from "./body";
 import OnBoardingBottom from "./bottom-actions";
-import { OnboardingProvider } from "./context";
 import OnBoardingTopBar from "./top-bar";
 
-const OnBoarding = () => {
+const OnBoardingScreen = () => {
+
   return (
-    <OnboardingProvider>
-      <div className="h-dvh flex flex-col">
-        <OnBoardingTopBar />
-        <OnBoardingBody />
-        <OnBoardingBottom />
-      </div>
-    </OnboardingProvider>
+    <div className=" max-w-lg mx-auto h-dvh flex flex-col">
+      <OnBoardingTopBar />
+      <OnBoardingBody />
+      <OnBoardingBottom />
+    </div>
   );
 };
 
-export default OnBoarding;
+export default OnBoardingScreen;

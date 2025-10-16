@@ -5,10 +5,10 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { motion } from "framer-motion";
 import { slides } from "./config";
-import { useOnboarding } from "./context";
+import { useOnboardingStore } from "@/stores/onboarding";
 
 const OnboardingScreenBody = () => {
-  const { bindSwiper } = useOnboarding();
+  const { setSwiper } = useOnboardingStore();
 
   return (
     <Swiper
@@ -18,7 +18,7 @@ const OnboardingScreenBody = () => {
       spaceBetween={24}
       loop={false}
       grabCursor={true}
-      onSwiper={bindSwiper}
+      onSwiper={setSwiper}
     >
       {slides.map(({ id, title, desc, Illustration }) => (
         <SwiperSlide key={id}>
@@ -33,7 +33,7 @@ const OnboardingScreenBody = () => {
             </motion.h2>
 
             <motion.div
-              className="flex items-center justify-center w-full max-h-[280px] lg:max-h-[350px]"
+              className="flex items-center justify-center w-full max-h-[280px] lg:max-h-[300px]"
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
