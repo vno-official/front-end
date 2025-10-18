@@ -14,12 +14,14 @@ interface OnboardingState {
   prevStep: () => void;
   close: () => void;
   skip: () => void;
+  _hasHydrated: boolean;
+  setHasHydrated: (state: boolean) => void;
 }
 
 export const useOnboardingStore = create<OnboardingState>()(
   persist(
     (set, get) => ({
-      isOpen: true, // mặc định true cho lần đầu
+      isOpen: true,
       currentStep: 0,
       swiper: null,
       setSwiper: (swiper) => {
@@ -42,17 +44,19 @@ export const useOnboardingStore = create<OnboardingState>()(
       },
       close: () => set({ isOpen: false }),
       skip: () => set({ isOpen: false }),
+      _hasHydrated: false,
+      setHasHydrated: (state) => set({ _hasHydrated: state }),
     }),
     {
       name: "onboarding-storage",
       storage: createJSONStorage(() => localStorage),
       partialize: (state) => ({ isOpen: state.isOpen }),
-      onRehydrateStorage: () => (state, error) => {
-        if (error) {
-          console.error("rehydrate error", error);
-        } else {
-          console.log("rehydrated state:", state);
-        }
+      skipHydration: true,
+      onRehydrateStorage: () => {
+        return () => {
+          // chắc chắn set sau khi rehydrate
+          useOnboardingStore.setState({ _hasHydrated: true });
+        };
       },
     }
   )

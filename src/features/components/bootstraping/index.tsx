@@ -1,21 +1,24 @@
-'use client'
+"use client";
 import { useOnboardingStore } from "@/stores/onboarding";
 import {} from "zustand";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 const ClientBootstraping = ({ children }: { children: React.ReactNode }) => {
-  const { isOpen } = useOnboardingStore();
-  console.log("🚀 ~ ClientBootstraping ~ isOpen:", isOpen)
-
+  const { isOpen, _hasHydrated } = useOnboardingStore();
   const router = useRouter();
 
   useEffect(() => {
-    if (!useOnboardingStore.persist.hasHydrated) return; // đợi hydrate xong
+    useOnboardingStore.persist.rehydrate();
+  }, []);
+
+  useEffect(() => {
+    console.log("hydrated?", _hasHydrated);
+    if (!_hasHydrated) return;
     if (isOpen) {
       router.push("/onboarding");
     }
-  }, [isOpen, router]);
+  }, [isOpen, _hasHydrated, router]);
 
   return <>{children}</>;
 };

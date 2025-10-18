@@ -25,7 +25,7 @@ const nextConfig: NextConfig = {
       rules: {
         "*.svg": {
           loaders: ["@svgr/webpack"],
-          as: "*.js", // or "*.ts" if using TypeScript
+          as: "*.ts",
         },
       },
     },

@@ -102,11 +102,11 @@ const AppBottombar = ({ className, ...props }: AppBottombarProps) => {
             })}
           </div>
 
-          <div className="!absolute -top-12 left-1/2 -translate-x-1/2">
+          <div className="!absolute -top-10 left-1/2 -translate-x-1/2">
             <Button
               size={"icon"}
               className={cn(
-                "size-24 border-8 border-background bg-primary rounded-full flex items-center justify-center",
+                "size-20 border-8 border-background bg-primary rounded-full flex items-center justify-center",
                 {
                   "pointer-events-none opacity-0": !shouldShow,
                   "translate-y-full": !shouldShow,
