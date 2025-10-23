@@ -9,7 +9,6 @@ import { getLocale, getTranslations } from "next-intl/server";
 import { DEFAULT_METADATA } from "@/config/metadata";
 import { cn } from "@/lib/utils";
 import AppWrapper from "@/components/layouts/wrapper";
-import { AppBottombar } from "@/lib/navigation";
 
 const montserrat = Montserrat({
   subsets: ["vietnamese"],
@@ -56,7 +55,6 @@ export default async function RootLayout({
           <NextIntlClientProvider>
             <RqProvider>
               <AppWrapper>{children}</AppWrapper>
-              <AppBottombar />
             </RqProvider>
           </NextIntlClientProvider>
         </ThemeProvider>

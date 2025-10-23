@@ -3,7 +3,7 @@ import React, { PropsWithChildren } from "react";
 type AppWrapperProps = PropsWithChildren;
 const AppWrapper = ({ children }: AppWrapperProps) => {
   return (
-    <main className="container mx-auto max-w-lg md:border-x-8 md:border-primary">
+    <main className="">
       <ClientBootstraping>{children}</ClientBootstraping>
     </main>
   );

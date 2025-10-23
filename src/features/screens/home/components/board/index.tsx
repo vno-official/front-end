@@ -59,7 +59,7 @@ const HomeScreenMainBoard = () => {
                   />
                 </div>
               </div>
-              <span className="text-sm text-center font-medium">
+              <span className="text-sm font-medium">
                 {workspace.name}
               </span>
             </div>
