@@ -1,8 +1,8 @@
-import { LoginForm } from "@/features/screens/auth";
+import LoginScreen from "@/features/screens/auth";
 import React from "react";
 
 const LoginPage = () => {
-  return <LoginForm />;
+  return <LoginScreen />;
 };
 
 export default LoginPage;

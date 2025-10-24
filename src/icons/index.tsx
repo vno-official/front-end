@@ -57,6 +57,9 @@ import BoxMoving from "./box-tapped.svg";
 import BoxTapped from "./box-icon.svg";
 import TruckDelivery from "./truck-delivery.svg";
 import Loader from "./loader.svg";
+// LOGOS
+import Github from "./logos/github.svg";
+import Google from "./logos/google.svg";
 
 export {
   BoxTapped,
@@ -118,4 +121,7 @@ export {
   ChatIcon,
   MoreDotIcon,
   Loader,
+  // LOGOS
+  Github,
+  Google,
 };

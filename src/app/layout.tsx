@@ -1,14 +1,11 @@
 import type { Metadata, Viewport } from "next";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "@/components/layouts/themes";
-import RqProvider from "@/providers/react-query";
-import NextTopLoader from "nextjs-toploader";
-import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getTranslations } from "next-intl/server";
 import { DEFAULT_METADATA } from "@/config/metadata";
 import { cn } from "@/lib/utils";
-import AppWrapper from "@/components/layouts/wrapper";
+import { DEVTOOL } from "@/config/env";
+import Providers from "./providers";
 
 const montserrat = Montserrat({
   subsets: ["vietnamese"],
@@ -45,19 +42,15 @@ export default async function RootLayout({
   return (
     <html lang={locale} suppressHydrationWarning className="select-none">
       <body className={cn(montserrat.variable, "antialiased")}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="light"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <NextTopLoader color="var(--foreground)" showSpinner={false} />
-          <NextIntlClientProvider>
-            <RqProvider>
-              <AppWrapper>{children}</AppWrapper>
-            </RqProvider>
-          </NextIntlClientProvider>
-        </ThemeProvider>
+        <Providers>{children}</Providers>
+
+        {DEVTOOL.ENABLED && (
+          <div
+            dangerouslySetInnerHTML={{
+              __html: `<script src="https://cdn.jsdelivr.net/npm/eruda"></script><script>eruda.init();</script>`,
+            }}
+          />
+        )}
       </body>
     </html>
   );
