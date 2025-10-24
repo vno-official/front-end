@@ -1,14 +1,14 @@
 import { BaseCrudApiClient, BaseRecord } from "@/apis/base";
 import { APP_API_URL } from "@/config/env";
 
-export interface IAppCrudApiClientOptions {
+export interface IVnoCrudApiClientOptions {
   resource: string;
 }
 
-export class AppCrudApiClient<
+export class VnoCrudApiClient<
   T extends BaseRecord = BaseRecord
 > extends BaseCrudApiClient<T> {
-  constructor({ resource }: IAppCrudApiClientOptions) {
+  constructor({ resource }: IVnoCrudApiClientOptions) {
     const baseUrl =
       typeof window === "undefined"
         ? `${APP_API_URL}/${resource}`

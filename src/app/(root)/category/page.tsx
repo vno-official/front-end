@@ -1,5 +1,5 @@
 "use client";
-import { appClient } from "@/apis/category";
+import { appClient } from "@/apis/vno";
 import { CONST_REVALIDATE_TAGS } from "@/const";
 import { AppTopbar } from "@/lib/navigation";
 import { useQuery } from "@tanstack/react-query";

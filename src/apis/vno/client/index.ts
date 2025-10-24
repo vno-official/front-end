@@ -1,7 +1,7 @@
 import { CategoriesApiClient } from "./category";
 
-class AppApiClient {
+class VnoClient {
   categoris = new CategoriesApiClient();
 }
 
-export const appClient = new AppApiClient();
+export const appClient = new VnoClient();
