@@ -14,7 +14,7 @@ const nextConfig: NextConfig = {
   async rewrites() {
     return [
       {
-        source: "/app-api/v1/:path*",
+        source: "/vno-api/v1/:path*",
         destination: `${APP_API_URL}/api/:path*`,
       },
     ];
