@@ -1,6 +1,6 @@
 "use client";
 
-const ClientBootstraping = ({ children }: { children: React.ReactNode }) => {
+const ClientBootstraping = () => {
 //   const { isOpen, _hasHydrated } = useOnboardingStore();
 //   const router = useRouter();
 
@@ -16,7 +16,7 @@ const ClientBootstraping = ({ children }: { children: React.ReactNode }) => {
 //     }
 //   }, [isOpen, _hasHydrated, router]);
 
-  return <>{children}</>;
+  return null;
 };
 
 export default ClientBootstraping;

@@ -21,7 +21,7 @@ const LoginScreen: FC<LoginScreenProps> = () => {
       toast.error(error.message);
     },
     onSuccess() {
-      window.location.replace(searchParams.get("next") || "/");
+      window.location.replace(searchParams.get("redirect") || "/");
     },
   });
 

@@ -1,4 +1,4 @@
-import LoginScreen from "@/features/screens/auth";
+import LoginScreen from "@/features/screens/login";
 import React from "react";
 
 const LoginPage = () => {

@@ -4,10 +4,11 @@ import React, { PropsWithChildren } from "react";
 type AppWrapperProps = PropsWithChildren;
 const AppWrapper = ({ children }: AppWrapperProps) => {
   return (
-    <ClientBootstraping>
+    <>
+      <ClientBootstraping />
       {children}
       <Toaster />
-    </ClientBootstraping>
+    </>
   );
 };
 

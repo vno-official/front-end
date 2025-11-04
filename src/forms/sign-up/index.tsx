@@ -8,12 +8,12 @@ import Link from "next/link";
 import {
   Mail,
   Lock,
-  Palette,
   Users,
-  Cloud,
-  ShieldCheck,
   Eye,
   EyeOff,
+  Palette,
+  Cloud,
+  ShieldCheck,
 } from "lucide-react";
 import {
   InputGroup,
@@ -21,7 +21,6 @@ import {
   InputGroupButton,
   InputGroupInput,
 } from "@/components/ui/input-group";
-import { Checkbox } from "@/components/ui/checkbox";
 import {
   Field,
   FieldError,
@@ -36,10 +35,15 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import Beams from "@/components/animate-backgrounds/beams";
 
-const signInSchema = z.object({
+// --- Signup schema ---
+const signUpSchema = z.object({
+  fullName: z
+    .string()
+    .min(2, "Full name must be at least 2 characters.")
+    .max(50, "Full name too long."),
   email: z
     .string()
     .email("Please enter a valid email address.")
@@ -48,27 +52,23 @@ const signInSchema = z.object({
     .string()
     .min(6, "Password must be at least 6 characters.")
     .max(50, "Password too long."),
-  remember: z.boolean().optional(),
 });
 
-export type SignInFormValues = z.infer<typeof signInSchema>;
+export type SignUpFormValues = z.infer<typeof signUpSchema>;
 
-interface SignInFormProps {
-  onSubmit: (values: SignInFormValues) => Promise<void> | void;
+interface SignUpFormProps {
+  onSubmit: (values: SignUpFormValues) => Promise<void> | void;
   loading?: boolean;
 }
 
-export default function SignInForm({ onSubmit, loading }: SignInFormProps) {
+export default function SignUpForm({ onSubmit, loading }: SignUpFormProps) {
   const [showPassword, setShowPassword] = React.useState(false);
   const searchParams = useSearchParams();
+  const router = useRouter();
 
-  const form = useForm<SignInFormValues>({
-    resolver: zodResolver(signInSchema),
-    defaultValues: {
-      email: "",
-      password: "",
-      remember: true,
-    },
+  const form = useForm<SignUpFormValues>({
+    resolver: zodResolver(signUpSchema),
+    defaultValues: { fullName: "", email: "", password: "" },
   });
 
   const {
@@ -79,10 +79,12 @@ export default function SignInForm({ onSubmit, loading }: SignInFormProps) {
 
   const handleFormSubmit = handleSubmit(async (values) => {
     await onSubmit(values);
+    // redirect after successful signup
+    const redirect = searchParams.get("redirect") || "/";
+    router.replace(redirect);
   });
 
   const isLoading = loading ?? isSubmitting;
-  const redirect = searchParams.get("redirect") || "/";
 
   return (
     <div className="relative flex min-h-screen w-full items-center justify-center lg:p-4">
@@ -91,9 +93,7 @@ export default function SignInForm({ onSubmit, loading }: SignInFormProps) {
           <div className="grid min-h-[700px] lg:grid-cols-2">
             {/* --- Left Side --- */}
             <div className="hidden lg:flex relative m-2 lg:m-4 rounded-3xl overflow-hidden p-6 lg:p-12 text-white">
-              <div
-                className="absolute inset-0 z-0"
-              >
+              <div className="absolute inset-0 z-0">
                 <Beams
                   beamWidth={2}
                   beamHeight={15}
@@ -113,8 +113,8 @@ export default function SignInForm({ onSubmit, loading }: SignInFormProps) {
                   Create, Design, and Innovate
                 </h1>
                 <p className="mb-4 lg:mb-12 text-base lg:text-xl opacity-80">
-                  Join thousands of creators who trust VNO Studio to
-                  bring their vision to life.
+                  Join thousands of creators who trust VNO Studio to bring their
+                  vision to life.
                 </p>
 
                 <div className="space-y-6">
@@ -166,9 +166,9 @@ export default function SignInForm({ onSubmit, loading }: SignInFormProps) {
             <div className="flex flex-col justify-center p-12">
               <div className="mx-auto w-full max-w-md">
                 <div className="mb-8 text-center">
-                  <h2 className="text-3xl uppercase">Welcome back</h2>
+                  <h2 className="text-3xl uppercase">Sign Up</h2>
                   <p className="mt-2 text-sm text-stone-600">
-                    Sign in to continue your creative journey
+                    Create an account to start using VNO Studio
                   </p>
                 </div>
 
@@ -179,7 +179,35 @@ export default function SignInForm({ onSubmit, loading }: SignInFormProps) {
                 >
                   <FieldSet>
                     <FieldGroup>
-                      {/* Email Field */}
+                      {/* Full Name */}
+                      <Controller
+                        name="fullName"
+                        control={control}
+                        render={({ field, fieldState }) => (
+                          <Field data-invalid={fieldState.invalid}>
+                            <FieldLabel htmlFor="fullName">
+                              Full Name
+                            </FieldLabel>
+                            <InputGroup className="h-10 border-border bg-input">
+                              <InputGroupInput
+                                id="fullName"
+                                type="text"
+                                placeholder="Enter your full name"
+                                aria-invalid={fieldState.invalid}
+                                {...field}
+                              />
+                              <InputGroupAddon>
+                                <Users className="h-5 w-5 text-gray-400" />
+                              </InputGroupAddon>
+                            </InputGroup>
+                            {fieldState.error && (
+                              <FieldError errors={[fieldState.error]} />
+                            )}
+                          </Field>
+                        )}
+                      />
+
+                      {/* Email */}
                       <Controller
                         name="email"
                         control={control}
@@ -191,7 +219,6 @@ export default function SignInForm({ onSubmit, loading }: SignInFormProps) {
                                 id="email"
                                 type="email"
                                 placeholder="Enter your email"
-                                className="autofill:bg-transparent"
                                 aria-invalid={fieldState.invalid}
                                 {...field}
                               />
@@ -206,7 +233,7 @@ export default function SignInForm({ onSubmit, loading }: SignInFormProps) {
                         )}
                       />
 
-                      {/* Password Field */}
+                      {/* Password */}
                       <Controller
                         name="password"
                         control={control}
@@ -217,8 +244,7 @@ export default function SignInForm({ onSubmit, loading }: SignInFormProps) {
                               <InputGroupInput
                                 id="password"
                                 type={showPassword ? "text" : "password"}
-                                placeholder="Enter your password"
-                                className="autofill:!bg-white autofill:!text-black"
+                                placeholder="Create a password"
                                 aria-invalid={fieldState.invalid}
                                 {...field}
                               />
@@ -260,39 +286,6 @@ export default function SignInForm({ onSubmit, loading }: SignInFormProps) {
                         )}
                       />
 
-                      {/* Remember me */}
-                      <Controller
-                        name="remember"
-                        control={control}
-                        render={({ field }) => (
-                          <div className="flex items-center justify-between">
-                            <Field
-                              orientation="horizontal"
-                              className="text-muted-foreground text-sm"
-                            >
-                              <Checkbox
-                                id="remember-me"
-                                checked={field.value}
-                                onCheckedChange={field.onChange}
-                              />
-                              <FieldLabel
-                                className="font-normal"
-                                htmlFor="remember-me"
-                              >
-                                Remember me
-                              </FieldLabel>
-                            </Field>
-
-                            <Link
-                              href="#"
-                              className="text-primary whitespace-nowrap hover:text-primary/80 text-sm"
-                            >
-                              Forgot password?
-                            </Link>
-                          </div>
-                        )}
-                      />
-
                       {/* Submit */}
                       <Button
                         type="submit"
@@ -300,9 +293,7 @@ export default function SignInForm({ onSubmit, loading }: SignInFormProps) {
                         className="w-full"
                         isLoading={isLoading}
                       >
-                        {isLoading
-                          ? "Signing in..."
-                          : "Sign in to your account"}
+                        {isLoading ? "Signing up..." : "Sign up"}
                       </Button>
 
                       {/* OAuth Divider */}
@@ -338,12 +329,14 @@ export default function SignInForm({ onSubmit, loading }: SignInFormProps) {
                 </form>
 
                 <div className="text-muted-foreground mt-8 text-center text-sm">
-                  Don&apos;t have an account?{" "}
+                  Already have an account?{" "}
                   <Link
-                    href={`/sign-up?redirect=${redirect}`}
+                    href={`/login?redirect=${
+                      searchParams.get("redirect") || "/"
+                    }`}
                     className="text-primary hover:text-primary/80"
                   >
-                    Sign up for free
+                    Log in
                   </Link>
                 </div>
               </div>
