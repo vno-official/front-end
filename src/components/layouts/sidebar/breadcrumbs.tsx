@@ -18,7 +18,7 @@ export const SidebarBreadcrumbs = () => {
   const pathname = usePathname();
   const paths = findSidebarPath(pathname);
 
-//   if (paths.length <= 1) return null;
+  if (paths.length <= 1) return null;
 
   return (
     <>

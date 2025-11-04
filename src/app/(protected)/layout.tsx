@@ -12,7 +12,7 @@ import { PropsWithChildren } from "react";
 type NotionAppLayoutProps = PropsWithChildren;
 const NotionAppLayout = async ({ children }: NotionAppLayoutProps) => {
   const session = await auth();
-  if (session)
+  if (!session)
     return (
       <SidebarProvider>
         <AppSidebar />
@@ -23,7 +23,7 @@ const NotionAppLayout = async ({ children }: NotionAppLayoutProps) => {
               <SidebarBreadcrumbs />
             </div>
           </header>
-          <div className="flex flex-1 flex-col gap-4 p-4 pt-0">{children}</div>
+          <div className="flex flex-1 flex-col gap-4 p-6 pt-0">{children}</div>
         </SidebarInset>
       </SidebarProvider>
     );
