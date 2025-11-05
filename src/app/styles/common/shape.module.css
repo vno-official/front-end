@@ -1,0 +1,19 @@
+.shape {
+  aspect-ratio: 1.429;
+  clip-path: shape(
+    from 48.57% 5.48%,
+    curve to 50.36% 6.67% with 49.02% 6.23%/49.67% 6.67%,
+    hline to 97.67%,
+    curve to 100% 10% with 98.96% 6.67%/100% 8.16%,
+    vline to 96.67%,
+    curve to 97.67% 100% with 100% 98.51%/98.96% 100%,
+    hline to 2.33%,
+    curve to 0% 96.67% with 1.04% 100%/0% 98.51%,
+    vline to 3.33%,
+    curve to 2.33% 0% with 0% 1.49%/1.04% 0%,
+    hline to 44.26%,
+    curve to 46.04% 1.19% with 44.95% 0%/45.6% 0.43%,
+    line to 48.57% 5.48%,
+    close
+  );
+}

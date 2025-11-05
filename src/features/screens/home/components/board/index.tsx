@@ -27,6 +27,7 @@ interface GridItem {
   tagColor: string;
   createAt: string;
 }
+import style from "@/app/styles/common/shape.module.css";
 
 const defaultGridItems: GridItem[] = [
   {
@@ -111,12 +112,13 @@ const HomeScreenMainBoard = () => {
             <SortableItem key={item.id} value={item.id}>
               <div
                 className={cn(
-                  "group relative p-3 bg-background border border-border rounded-lg hover:bg-accent/50 transition-colors cursor-pointer",
-                  "min-h-[150px] flex flex-col"
+                  "group relative p-3 bg-primary/5 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer",
+                  "min-h-[150px] flex flex-col pt-6",
+                  style.shape
                 )}
                 onClick={() => console.log("🔴 GRID ITEM CLICKED:", item.id)}
               >
-                <SortableItemHandle className="absolute top-2.5 end-2.5 text-muted-foreground hover:text-foreground z-10 opacity-0 group-hover:opacity-100 transition-opacity size-6 rounded-full bg-white flex items-center justify-center">
+                <SortableItemHandle className="absolute top-4 end-3 text-muted-foreground hover:text-foreground z-10 opacity-0 group-hover:opacity-100 transition-opacity size-6 rounded-full bg-white flex items-center justify-center">
                   <GripVertical className="size-4" />
                 </SortableItemHandle>
 
