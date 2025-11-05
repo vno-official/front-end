@@ -106,13 +106,13 @@ const HomeScreenMainBoard = () => {
           onValueChange={handleValueChange}
           getItemValue={getItemValue}
           strategy="grid"
-          className="grid grid-cols-3 gap-3 auto-rows-fr"
+          className="grid grid-cols-2 lg:grid-cols-3 gap-3 auto-rows-fr"
         >
           {items.map((item) => (
             <SortableItem key={item.id} value={item.id}>
               <div
                 className={cn(
-                  "group relative p-3 bg-primary/5 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer",
+                  "group relative p-3 bg-primary/5 rounded-lg hover:bg-accent/30 transition-colors cursor-pointer",
                   "min-h-[150px] flex flex-col pt-6",
                   style.shape
                 )}
