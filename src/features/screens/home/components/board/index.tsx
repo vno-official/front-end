@@ -27,7 +27,7 @@ interface GridItem {
   tagColor: string;
   createAt: string;
 }
-import style from "@/app/styles/common/shape.module.css";
+import style from "@/styles/common/shape.module.css";
 
 const defaultGridItems: GridItem[] = [
   {
